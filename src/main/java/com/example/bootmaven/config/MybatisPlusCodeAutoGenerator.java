@@ -34,6 +34,7 @@ public class MybatisPlusCodeAutoGenerator {
                 })
                 .strategyConfig(builder -> {
                     builder.addInclude("menu")
+                            .addInclude("sysuser")
                             .entityBuilder()
                             .enableTableFieldAnnotation()
                             .naming(NamingStrategy.underline_to_camel)

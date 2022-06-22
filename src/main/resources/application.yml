@@ -1,0 +1,20 @@
+server:
+  port: 5015
+  servlet:
+    context-path: /boot/
+spring:
+  application:
+    name: boot
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://192.168.109.128:3306/robin?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: T0N4R+cV3A+zS+yvGRqHXAgsVSODLSK7IdHKZaIloHCyiGEDc94bAtw59AQ0y3XzbiDhIFWyOYP+47zSztYHog==
+    druid:
+      filter:
+        config:
+          enabled: true
+      connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJjVoNjug97bUT80hzrM761GNC4un1csTEff6QnPj4CAgWLDLYyuwoVfi+ll0+iMZRYR04gn52gE39H10BIOSrkCAwEAAQ==

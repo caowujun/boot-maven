@@ -16,36 +16,33 @@ import lombok.Setter;
  * </p>
  *
  * @author robin
- * @since 2022-06-21
+ * @since 2022-06-24
  */
 @Getter
 @Setter
-@TableName("menu")
-@ApiModel(value = "Menu对象", description = "")
-public class Menu implements Serializable {
+@TableName("money")
+@ApiModel(value = "Money对象", description = "")
+public class MoneyDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId("id")
     private String id;
 
-    @TableField("parentid")
-    private String parentid;
+    @TableField("spendnum")
+    private Double spendnum;
 
-    @TableField("title")
-    private String title;
+    @TableField("moneytype")
+    private Integer moneytype;
 
-    @TableField("actionurl")
-    private String actionurl;
+    @TableField("note")
+    private String note;
 
-    @TableField("status")
-    private Integer status;
+    @TableField("recorddate")
+    private String recorddate;
 
-    @TableField("sortindex")
-    private Integer sortindex;
-
-    @TableField("icon")
-    private String icon;
+    @TableField("consumptiontype")
+    private String consumptiontype;
 
     @TableField("createat")
     private LocalDateTime createat;

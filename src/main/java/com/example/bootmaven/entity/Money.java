@@ -16,39 +16,45 @@ import lombok.Setter;
  * </p>
  *
  * @author robin
- * @since 2022-06-21
+ * @since 2022-06-24
  */
 @Getter
 @Setter
-@TableName("sysuser")
-@ApiModel(value = "Sysuser对象", description = "")
-public class Sysuser implements Serializable {
+@TableName("money")
+@ApiModel(value = "Money对象", description = "")
+public class Money implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId("id")
     private String id;
 
-    @TableField("username")
-    private String username;
+    @TableField("spendnum")
+    private Double spendnum;
 
-    @TableField("userpsd")
-    private String userpsd;
+    @TableField("moneytype")
+    private Integer moneytype;
 
-    @TableField("cnname")
-    private String cnname;
+    @TableField("note")
+    private String note;
 
-    @TableField("phonenum")
-    private String phonenum;
+    @TableField("recorddate")
+    private String recorddate;
 
-    @TableField("status")
-    private Integer status;
+    @TableField("consumptiontype")
+    private String consumptiontype;
 
     @TableField("createat")
     private LocalDateTime createat;
 
+    @TableField("createby")
+    private String createby;
+
     @TableField("updateat")
     private LocalDateTime updateat;
+
+    @TableField("updateby")
+    private String updateby;
 
 
 }

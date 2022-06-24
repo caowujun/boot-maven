@@ -1,6 +1,6 @@
 package com.example.bootmaven.service;
 
-import com.example.bootmaven.entity.Menu;
+import com.example.bootmaven.entity.Money;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -9,8 +9,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author robin
- * @since 2022-06-21
+ * @since 2022-06-24
  */
-public interface IMenuService extends IService<Menu> {
+public interface IMoneyService extends IService<Money> {
 
 }

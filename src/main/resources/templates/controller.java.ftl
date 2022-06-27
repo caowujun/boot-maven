@@ -90,7 +90,7 @@ private ${table.serviceName} i${entity}Service;
 * @param id 主键
 * @return 单条数据
 */
-@GetMapping("{id}")
+@GetMapping("getById.do")
  @ApiOperation(value = "根据id获取数据", notes = "id")
  public R getById(String id)
  {
@@ -104,7 +104,7 @@ private ${table.serviceName} i${entity}Service;
 /**
 * 新增数据
 *
-* @param ${entity} 实体对象
+* @param entity 实体对象
 * @return 新增结果
 */
  @PostMapping(value = "insert.do")

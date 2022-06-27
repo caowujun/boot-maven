@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 public class BaseController {
 
 
-    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public BaseController() {
     }
@@ -25,9 +24,9 @@ public class BaseController {
         return R.failed(msg);
     }
 
-//    protected <T> R<T> failed(IErrorCode errorCode) {
-//        return R.failed(errorCode);
-//    }
+    protected <T> R<T> failed(IErrorCode errorCode) {
+        return R.failed(errorCode);
+    }
 
 
 }

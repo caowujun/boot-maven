@@ -1,18 +1,18 @@
 package com.example.bootmaven.dao;
 
-import com.example.bootmaven.entity.Money;
+import com.example.bootmaven.entity.Roleuser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
- * 消费 Mapper 接口
+ * 角色-用户对应表 Mapper 接口
  * </p>
  *
  * @author robin
  * @since 2022-06-27
  */
 @Mapper
-public interface MoneyDao extends BaseMapper<Money> {
+public interface RoleuserDao extends BaseMapper<Roleuser> {
 
 }

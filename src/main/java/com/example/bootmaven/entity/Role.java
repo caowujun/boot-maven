@@ -11,36 +11,36 @@ package com.example.bootmaven.entity;
 
 /**
 * <p>
-    * 消费
+    * 角色
     * </p>
 *
 * @author robin
 * @since 2022-06-27
 */
     @Data
-    @TableName("money")
-    @ApiModel(value = "Money对象", description = "消费")
-    public class Money implements Serializable {
+    @TableName("role")
+    @ApiModel(value = "Role对象", description = "角色")
+    public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
             @TableId("id")
     private String id;
 
-        @TableField("spendnum")
-    private Double spendnum;
+        @TableField("parentid")
+    private String parentid;
 
-        @TableField("moneytype")
-    private Integer moneytype;
+        @TableField("title")
+    private String title;
 
-        @TableField("note")
-    private String note;
+        @TableField("description")
+    private String description;
 
-        @TableField("recorddate")
-    private String recorddate;
+        @TableField("status")
+    private Integer status;
 
-        @TableField("consumptiontype")
-    private String consumptiontype;
+        @TableField("sortindex")
+    private Integer sortindex;
 
         @TableField("createat")
     private LocalDateTime createat;

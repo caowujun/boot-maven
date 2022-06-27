@@ -12,37 +12,31 @@ import lombok.Setter;
 
 /**
  * <p>
- * 
+ * 系统公告
  * </p>
  *
  * @author robin
- * @since 2022-06-24
+ * @since 2022-06-27
  */
 @Getter
 @Setter
-@TableName("money")
-@ApiModel(value = "Money对象", description = "")
-public class MoneyDto implements Serializable {
+@TableName("noticeboard")
+@ApiModel(value = "Noticeboard对象", description = "系统公告")
+public class NoticeboardDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId("id")
     private String id;
 
-    @TableField("spendnum")
-    private Double spendnum;
+    @TableField("noticetitle")
+    private String noticetitle;
 
-    @TableField("moneytype")
-    private Integer moneytype;
+    @TableField("noticecontent")
+    private String noticecontent;
 
-    @TableField("note")
-    private String note;
-
-    @TableField("recorddate")
-    private String recorddate;
-
-    @TableField("consumptiontype")
-    private String consumptiontype;
+    @TableField("noticetype")
+    private Integer noticetype;
 
     @TableField("createat")
     private LocalDateTime createat;

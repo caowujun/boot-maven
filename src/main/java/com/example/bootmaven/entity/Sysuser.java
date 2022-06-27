@@ -11,48 +11,42 @@ package com.example.bootmaven.entity;
 
 /**
 * <p>
-    * 消费
+    * 系统用户
     * </p>
 *
 * @author robin
 * @since 2022-06-27
 */
     @Data
-    @TableName("money")
-    @ApiModel(value = "Money对象", description = "消费")
-    public class Money implements Serializable {
+    @TableName("sysuser")
+    @ApiModel(value = "Sysuser对象", description = "系统用户")
+    public class Sysuser implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
             @TableId("id")
     private String id;
 
-        @TableField("spendnum")
-    private Double spendnum;
+        @TableField("username")
+    private String username;
 
-        @TableField("moneytype")
-    private Integer moneytype;
+        @TableField("userpsd")
+    private String userpsd;
 
-        @TableField("note")
-    private String note;
+        @TableField("cnname")
+    private String cnname;
 
-        @TableField("recorddate")
-    private String recorddate;
+        @TableField("phonenum")
+    private String phonenum;
 
-        @TableField("consumptiontype")
-    private String consumptiontype;
+        @TableField("status")
+    private Integer status;
 
         @TableField("createat")
     private LocalDateTime createat;
 
-        @TableField("createby")
-    private String createby;
-
         @TableField("updateat")
     private LocalDateTime updateat;
-
-        @TableField("updateby")
-    private String updateby;
 
 
 }

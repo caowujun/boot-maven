@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 消费 服务实现类
  * </p>
  *
  * @author robin
- * @since 2022-06-24
+ * @since 2022-06-27
  */
 @Service
 public class MoneyServiceImpl extends ServiceImpl<MoneyDao, Money> implements IMoneyService {

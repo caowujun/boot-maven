@@ -1,16 +1,16 @@
 package com.example.bootmaven.service;
 
-import com.example.bootmaven.entity.Money;
+import com.example.bootmaven.entity.Noticeboard;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- * 消费 服务类
+ * 系统公告 服务类
  * </p>
  *
  * @author robin
  * @since 2022-06-27
  */
-public interface IMoneyService extends IService<Money> {
+public interface INoticeboardService extends IService<Noticeboard> {
 
 }

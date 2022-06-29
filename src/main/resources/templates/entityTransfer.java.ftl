@@ -7,8 +7,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.springframework.core.convert.converter.Converter;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.example.bootmaven.config.MapStructConvertor;
 import java.util.List;
+import org.mapstruct.factory.Mappers;
 
 /**
 * <p>

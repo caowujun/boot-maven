@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
 import org.springframework.core.convert.ConversionService;
+import com.example.bootmaven.vo.${entity}VO;
+
 
 <#if restControllerStyle>
 <#else>

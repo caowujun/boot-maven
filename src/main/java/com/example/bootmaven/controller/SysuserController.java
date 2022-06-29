@@ -14,19 +14,19 @@ import com.example.bootmaven.vo.votransfer.SysuserTransfer;
 import com.example.bootmaven.vo.SysuserVO;
 
 
-    import com.example.bootmaven.BaseController;
+import com.example.bootmaven.BaseController;
 
 /**
 * <p>
-    * 系统用户 前端控制器
-    * </p>
+* 系统用户 前端控制器
+* </p>
 *
 * @author robin
 * @since 2022-06-29
 */
-    @RestController
+@RestController
 @RequestMapping("/sysuser")
-    public class SysuserController extends BaseController {
+public class SysuserController extends BaseController {
 
 /**
 * 服务对象
@@ -63,8 +63,7 @@ return failed(ex.getMessage());
 */
 @GetMapping(value = "listAll.do")
 @ApiOperation(value = "查询Sysuser数据列表,不分页", notes = "查询Sysuser数据列表,不分页")
-public R
-<List<Sysuser>> listAll(Sysuser  entity)
+public R<List<Sysuser>> listAll(Sysuser  entity)
 {
 try{
 return success(this.iSysuserService.list(new QueryWrapper<Sysuser>(entity)));
@@ -98,67 +97,62 @@ return failed(ex.getMessage());
 */
 @PostMapping(value = "insert.do")
 @ApiOperation(value = "Sysuser数据新增", notes = "Sysuser数据新增")
-public R
-<Boolean> save(@RequestBody Sysuser entity)
-    {
-    try{
-    return success(this.iSysuserService.save(entity));
-    } catch (Exception ex) {
-    return failed(ex.getMessage());
-    }
-    }
+public R<Boolean> save(@RequestBody Sysuser entity)
+{
+try{
+return success(this.iSysuserService.save(entity));
+} catch (Exception ex) {
+return failed(ex.getMessage());
+}
+}
 
-    /**
-    * 修改数据
-    *
-    * @param entity 实体对象
-    * @return 修改结果
-    */
-    @PostMapping(value = "update.do")
-    @ApiOperation(value = "Sysuser数据更新", notes = "{entity}数据更新")
-    public R
-    <Boolean> update(@RequestBody Sysuser entity) {
-        try{
-        return success(this.iSysuserService.updateById(entity));
-        } catch (Exception ex) {
-        return failed(ex.getMessage());
-        }
-        }
+/**
+* 修改数据
+*
+* @param entity 实体对象
+* @return 修改结果
+*/
+@PostMapping(value = "update.do")
+@ApiOperation(value = "Sysuser数据更新", notes = "{entity}数据更新")
+public R<Boolean> update(@RequestBody Sysuser entity) {
+try{
+return success(this.iSysuserService.updateById(entity));
+} catch (Exception ex) {
+return failed(ex.getMessage());
+}
+}
 
-        /**
-        * 删除数据
-        *
-        * @param id 主键
-        * @return 删除结果
-        */
-        @PostMapping(value = "removeById.do")
-        @ApiOperation(value = "根据id删除Sysuser数据", notes = "根据id删除Sysuser数据")
-        public R
-        <Boolean> removeById(@RequestParam("id") String id) {
-            try
-            {
-            return success(this.iSysuserService.removeById(id));
-            } catch (Exception ex) {
-            return failed(ex.getMessage());
-            }
-            }
+/**
+* 删除数据
+*
+* @param id 主键
+* @return 删除结果
+*/
+@PostMapping(value = "removeById.do")
+@ApiOperation(value = "根据id删除Sysuser数据", notes = "根据id删除Sysuser数据")
+public R<Boolean> removeById(@RequestParam("id") String id) {
+try
+{
+return success(this.iSysuserService.removeById(id));
+} catch (Exception ex) {
+return failed(ex.getMessage());
+}
+}
 
-            /**
-            * 批量删除数据
-            *
-            * @param idList 主键集合
-            * @return 删除结果
-            */
-            @PostMapping(value = "removeByIds.do")
-            @ApiOperation(value = "批量删除Sysuser数据", notes = "批量删除Sysuser数据")
-            public R
-            <Boolean> removeByIds(@RequestParam("idList") List
-                <Long> idList) {
-                    try
-                    {
-                    return success(this.iSysuserService.removeByIds(idList));
-                    } catch (Exception ex) {
-                    return failed(ex.getMessage());
-                    }
-                    }
-                    }
+/**
+* 批量删除数据
+*
+* @param idList 主键集合
+* @return 删除结果
+*/
+@PostMapping(value = "removeByIds.do")
+@ApiOperation(value = "批量删除Sysuser数据", notes = "批量删除Sysuser数据")
+public R<Boolean> removeByIds(@RequestParam("idList") List<Long> idList) {
+try
+{
+return success(this.iSysuserService.removeByIds(idList));
+} catch (Exception ex) {
+return failed(ex.getMessage());
+}
+}
+}

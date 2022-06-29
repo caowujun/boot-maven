@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
-import org.springframework.core.convert.ConversionService;
+import com.example.bootmaven.vo.votransfer.CustomconfigTransfer;
 import com.example.bootmaven.vo.CustomconfigVO;
 
 
@@ -33,7 +33,8 @@ import com.example.bootmaven.vo.CustomconfigVO;
 */
 @Resource
 private ICustomconfigService iCustomconfigService;
-
+@Resource
+private CustomconfigTransfer transfer;
 
 /**
 * 分页查询所有数据

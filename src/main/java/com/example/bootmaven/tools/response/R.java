@@ -34,11 +34,11 @@ public class R<T> implements Serializable {
     }
 
     public static <T> R<T> failed(String msg) {
-        return restResult( null, ResponseCode.FAILED.getCode(), msg);
+        return restResult(null, ResponseCode.FAILED.getCode(), msg);
     }
 
     public static <T> R<T> failed(IErrorCode errorCode) {
-        return restResult( null, errorCode);
+        return restResult(null, errorCode);
     }
 
     public static <T> R<T> restResult(T data, IErrorCode errorCode) {
@@ -46,7 +46,7 @@ public class R<T> implements Serializable {
     }
 
     private static <T> R<T> restResult(T data, long code, String msg) {
-        R<T> apiResult = new R();
+        R<T> apiResult = new R<T>();
         apiResult.setCode(code);
         apiResult.setData(data);
         apiResult.setMsg(msg);
@@ -98,7 +98,7 @@ public class R<T> implements Serializable {
         } else if (!(o instanceof R)) {
             return false;
         } else {
-            R<?> other = (R)o;
+            R<?> other = (R<?>) o;
             if (!other.canEqual(this)) {
                 return false;
             } else if (this.getCode() != other.getCode()) {
@@ -117,14 +117,8 @@ public class R<T> implements Serializable {
                 Object this$msg = this.getMsg();
                 Object other$msg = other.getMsg();
                 if (this$msg == null) {
-                    if (other$msg != null) {
-                        return false;
-                    }
-                } else if (!this$msg.equals(other$msg)) {
-                    return false;
-                }
-
-                return true;
+                    return other$msg == null;
+                } else return this$msg.equals(other$msg);
             }
         }
     }
@@ -137,7 +131,7 @@ public class R<T> implements Serializable {
 //        int PRIME = true;
         int result = 1;
         long $code = this.getCode();
-          result = result * 59 + (int)($code >>> 32 ^ $code);
+        result = result * 59 + (int) ($code >>> 32 ^ $code);
         Object $data = this.getData();
         result = result * 59 + ($data == null ? 43 : $data.hashCode());
         Object $msg = this.getMsg();

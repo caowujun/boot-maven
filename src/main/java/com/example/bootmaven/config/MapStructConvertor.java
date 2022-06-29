@@ -1,18 +1,14 @@
 //package com.example.bootmaven.config;
 //
-//import org.mapstruct.Mapper;
-//import org.mapstruct.Mapping;
-//import org.mapstruct.Mappings;
-//import org.mapstruct.Named;
 //
+//import org.mapstruct.Named;
 //import java.time.LocalDateTime;
 //import java.time.format.DateTimeFormatter;
 //
 //public interface MapStructConvertor   {
 //
 //
-//    //-------------------------------------------------------------------------------------------------------------------------------
-//    /*
+//     /*
 //     * @author robin
 //     * @description 不能单独定义成一行，比如 // DateTimeFormatter df=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
 //     * @date 2022/6/28 15:38

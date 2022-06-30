@@ -63,8 +63,7 @@ private ${entity}Transfer transfer;
 */
 @GetMapping(value = "page.do")
 @ApiOperation(value = "查询${entity}数据列表，带分页", notes = "查询${entity}数据列表，带分页")
-public R
-<Page<${entity}>> page(Page<${entity}> page, ${entity}  entity)
+public R<Page<${entity}>> page(Page<${entity}> page, ${entity}  entity)
 {
 try{
 return success(this.i${entity}Service.page(page, new QueryWrapper<${entity}>(entity)));

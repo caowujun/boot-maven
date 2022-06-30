@@ -45,8 +45,7 @@ private FireTransfer transfer;
 */
 @GetMapping(value = "page.do")
 @ApiOperation(value = "查询Fire数据列表，带分页", notes = "查询Fire数据列表，带分页")
-public R
-<Page<Fire>> page(Page<Fire> page, Fire  entity)
+public R<Page<Fire>> page(Page<Fire> page, Fire  entity)
 {
 try{
 return success(this.iFireService.page(page, new QueryWrapper<Fire>(entity)));

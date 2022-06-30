@@ -45,8 +45,7 @@ private CustomconfigTransfer transfer;
 */
 @GetMapping(value = "page.do")
 @ApiOperation(value = "查询Customconfig数据列表，带分页", notes = "查询Customconfig数据列表，带分页")
-public R
-<Page<Customconfig>> page(Page<Customconfig> page, Customconfig  entity)
+public R<Page<Customconfig>> page(Page<Customconfig> page, Customconfig  entity)
 {
 try{
 return success(this.iCustomconfigService.page(page, new QueryWrapper<Customconfig>(entity)));

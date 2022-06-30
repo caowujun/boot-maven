@@ -45,8 +45,7 @@ private NoticeboardTransfer transfer;
 */
 @GetMapping(value = "page.do")
 @ApiOperation(value = "查询Noticeboard数据列表，带分页", notes = "查询Noticeboard数据列表，带分页")
-public R
-<Page<Noticeboard>> page(Page<Noticeboard> page, Noticeboard  entity)
+public R<Page<Noticeboard>> page(Page<Noticeboard> page, Noticeboard  entity)
 {
 try{
 return success(this.iNoticeboardService.page(page, new QueryWrapper<Noticeboard>(entity)));

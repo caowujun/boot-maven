@@ -45,8 +45,7 @@ private RoleuserTransfer transfer;
 */
 @GetMapping(value = "page.do")
 @ApiOperation(value = "查询Roleuser数据列表，带分页", notes = "查询Roleuser数据列表，带分页")
-public R
-<Page<Roleuser>> page(Page<Roleuser> page, Roleuser  entity)
+public R<Page<Roleuser>> page(Page<Roleuser> page, Roleuser  entity)
 {
 try{
 return success(this.iRoleuserService.page(page, new QueryWrapper<Roleuser>(entity)));

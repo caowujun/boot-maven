@@ -45,8 +45,7 @@ private RoleTransfer transfer;
 */
 @GetMapping(value = "page.do")
 @ApiOperation(value = "查询Role数据列表，带分页", notes = "查询Role数据列表，带分页")
-public R
-<Page<Role>> page(Page<Role> page, Role  entity)
+public R<Page<Role>> page(Page<Role> page, Role  entity)
 {
 try{
 return success(this.iRoleService.page(page, new QueryWrapper<Role>(entity)));

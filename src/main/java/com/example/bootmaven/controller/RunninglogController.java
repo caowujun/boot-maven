@@ -45,8 +45,7 @@ private RunninglogTransfer transfer;
 */
 @GetMapping(value = "page.do")
 @ApiOperation(value = "查询Runninglog数据列表，带分页", notes = "查询Runninglog数据列表，带分页")
-public R
-<Page<Runninglog>> page(Page<Runninglog> page, Runninglog  entity)
+public R<Page<Runninglog>> page(Page<Runninglog> page, Runninglog  entity)
 {
 try{
 return success(this.iRunninglogService.page(page, new QueryWrapper<Runninglog>(entity)));

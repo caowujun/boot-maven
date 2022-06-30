@@ -45,8 +45,7 @@ private MenuTransfer transfer;
 */
 @GetMapping(value = "page.do")
 @ApiOperation(value = "查询Menu数据列表，带分页", notes = "查询Menu数据列表，带分页")
-public R
-<Page<Menu>> page(Page<Menu> page, Menu  entity)
+public R<Page<Menu>> page(Page<Menu> page, Menu  entity)
 {
 try{
 return success(this.iMenuService.page(page, new QueryWrapper<Menu>(entity)));

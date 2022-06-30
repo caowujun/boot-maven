@@ -45,8 +45,7 @@ private RolemenuTransfer transfer;
 */
 @GetMapping(value = "page.do")
 @ApiOperation(value = "查询Rolemenu数据列表，带分页", notes = "查询Rolemenu数据列表，带分页")
-public R
-<Page<Rolemenu>> page(Page<Rolemenu> page, Rolemenu  entity)
+public R<Page<Rolemenu>> page(Page<Rolemenu> page, Rolemenu  entity)
 {
 try{
 return success(this.iRolemenuService.page(page, new QueryWrapper<Rolemenu>(entity)));

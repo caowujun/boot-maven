@@ -45,8 +45,7 @@ private EnumtypesTransfer transfer;
 */
 @GetMapping(value = "page.do")
 @ApiOperation(value = "查询Enumtypes数据列表，带分页", notes = "查询Enumtypes数据列表，带分页")
-public R
-<Page<Enumtypes>> page(Page<Enumtypes> page, Enumtypes  entity)
+public R<Page<Enumtypes>> page(Page<Enumtypes> page, Enumtypes  entity)
 {
 try{
 return success(this.iEnumtypesService.page(page, new QueryWrapper<Enumtypes>(entity)));

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.bootmaven.dao.EnumtypesDao">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.bootmaven.entity.Enumtypes">
+        <id column="id" property="id" />
+        <result column="parentid" property="parentid" />
+        <result column="enumname" property="enumname" />
+        <result column="enumvalue" property="enumvalue" />
+        <result column="enumtype" property="enumtype" />
+        <result column="description" property="description" />
+        <result column="status" property="status" />
+        <result column="createat" property="createat" />
+        <result column="createby" property="createby" />
+        <result column="updateat" property="updateat" />
+        <result column="updateby" property="updateby" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, parentid, enumname, enumvalue, enumtype, description, status, createat, createby, updateat, updateby
+    </sql>
+
+</mapper>

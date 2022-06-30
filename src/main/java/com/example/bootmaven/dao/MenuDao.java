@@ -6,11 +6,11 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
- *  Mapper 接口
+ * 菜单 Mapper 接口
  * </p>
  *
  * @author robin
- * @since 2022-06-21
+ * @since 2022-06-29
  */
 @Mapper
 public interface MenuDao extends BaseMapper<Menu> {

@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 菜单 服务实现类
  * </p>
  *
  * @author robin
- * @since 2022-06-21
+ * @since 2022-06-29
  */
 @Service
 public class MenuServiceImpl extends ServiceImpl<MenuDao, Menu> implements IMenuService {

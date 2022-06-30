@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @MapperScan("com.example.bootmaven.dao")
-@EnableTransactionManagement
+//@EnableTransactionManagement
 public class BootMavenApplication {
 
     public static void main(String[] args) {

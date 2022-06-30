@@ -172,18 +172,22 @@ public class SysuserController extends BaseController {
     @ApiOperation(value = "登录", notes = "根据账号密码登录")
     public R<?> login(@RequestBody Sysuser sysuser, HttpServletRequest request, HttpServletResponse response) {
         try {
-            sysuser = iSysuserService.getById("1fa65854-92aa-42a9-b16b-ffdb6a68ae91");
+            //1fa65854-92aa-42a9-b16b-ffdb6a68ae91
+            sysuser = iSysuserService.getById(sysuser.getId());
             if (null != sysuser) {
+                Sysuser finalSysuser = sysuser;
                 Map<String, Object> map = new HashMap<String, Object>() {
                     private static final long serialVersionUID = 1L;
                     {
-                        put("id",  "1fa65854-92aa-42a9-b16b-ffdb6a68ae91");
-                        put("loginname",  "caowujun")  ;
-                        put("cnname",  "曹武军");
+                        put("id", finalSysuser.getId());
+                        put("loginname",  finalSysuser.getUsername())  ;
+                        put("cnname",  finalSysuser.getCnname());
                         put("expire_time", System.currentTimeMillis() + 120 * 60 * 1000);
                     }
                 };
-                response.addHeader("token", JWTUtil.createToken(map, GlobalValue.TOKEN_SECRET));
+                String token =JWTUtil.createToken(map, GlobalValue.TOKEN_SECRET);
+System.out.print(token);
+                response.addHeader("token", token);
                 return success(sysuser);
             } else {
                 return success(false);

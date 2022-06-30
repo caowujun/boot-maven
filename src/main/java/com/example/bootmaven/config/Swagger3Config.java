@@ -21,7 +21,7 @@ import springfox.documentation.spring.web.plugins.Docket;
  * @date 2022年06月21日 10:00
  */
 @Configuration
-@ConditionalOnProperty(value = "springfox.documentation.enabled", havingValue = "true", matchIfMissing = true)
+//@ConditionalOnProperty(value = "springfox.documentation.enabled", havingValue = "true", matchIfMissing = true)
 @EnableWebMvc
 public class Swagger3Config implements WebMvcConfigurer {
 
@@ -39,7 +39,7 @@ public class Swagger3Config implements WebMvcConfigurer {
         return new ApiInfoBuilder()
                 .title("Swagger3接口文档")
                 .description("SpringBoot后台接口")
-//                .contact(new Contact("robin", "https://caowujun.github.io/", "https://caowujun.github.io/"))
+                .contact(new Contact("robin", "https://caowujun.github.io/", "https://caowujun.github.io/"))
                 .version("1.0")
                 .build();
     }

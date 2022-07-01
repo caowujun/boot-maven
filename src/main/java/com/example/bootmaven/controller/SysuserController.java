@@ -159,15 +159,16 @@ public class SysuserController extends BaseController {
             return failed(ex.getMessage());
         }
     }
-/*
- * @author robin 
- * @description 登录
- * @date 2022/6/29 16:55
- * @param sysuser
- * @param request
- * @param response 
- * @return com.example.bootmaven.tools.response.R<?>
- */
+
+    /*
+     * @author robin
+     * @description 登录
+     * @date 2022/6/29 16:55
+     * @param sysuser
+     * @param request
+     * @param response
+     * @return com.example.bootmaven.tools.response.R<?>
+     */
     @PostMapping(value = "login.do")
     @ApiOperation(value = "登录", notes = "根据账号密码登录")
     public R<?> login(@RequestBody Sysuser sysuser, HttpServletRequest request, HttpServletResponse response) {
@@ -180,15 +181,16 @@ public class SysuserController extends BaseController {
                     private static final long serialVersionUID = 1L;
                     {
                         put("id", finalSysuser.getId());
-                        put("loginname",  finalSysuser.getUsername())  ;
-                        put("cnname",  finalSysuser.getCnname());
+                        put("loginname", finalSysuser.getUsername());
+                        put("cnname", finalSysuser.getCnname());
                         put("expire_time", System.currentTimeMillis() + 120 * 60 * 1000);
                     }
                 };
-                String token =JWTUtil.createToken(map, GlobalValue.TOKEN_SECRET);
-System.out.print(token);
+                String token = JWTUtil.createToken(map, GlobalValue.TOKEN_SECRET);
+                System.out.print(token);
                 response.addHeader("token", token);
-                return success(sysuser);
+
+                return success(transfer.d2v(sysuser));
             } else {
                 return success(false);
             }

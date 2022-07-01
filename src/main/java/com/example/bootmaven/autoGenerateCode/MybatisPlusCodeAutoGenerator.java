@@ -63,12 +63,16 @@ public class MybatisPlusCodeAutoGenerator {
                             .formatXmlFileName("%sXml"); // 转换 xml 文件名称
                 })
                 .injectionConfig(builder -> {
-                    Map<String, String> customFile = new HashMap<>();
                     // DTO，.vm为velocity引擎的，.ftl为freemarker
+                    Map<String, String> customFile = new HashMap<>();
                     customFile.put("VO.java", "/templates/entityVO.java.ftl");
                     customFile.put("Transfer.java", "/templates/entityTransfer.java.ftl");
+                    //注入数据
+                    Map<String, Object> customDataMap = new HashMap<>();
+                    customDataMap.put("rootPackage", "com.example.bootmaven");
 
-                    builder.customFile(customFile);
+                    builder.customFile(customFile).customMap(customDataMap);
+
                 })
                 .templateEngine(new FreemarkerTemplateEngineExtend()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
                 .execute();

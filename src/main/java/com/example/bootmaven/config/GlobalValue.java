@@ -6,5 +6,6 @@ package com.example.bootmaven.config;
  * @description
  */
 public class GlobalValue {
+    //用户密钥有效时长
     public  static final  byte[] TOKEN_SECRET = "robin_privatekey".getBytes();
 }

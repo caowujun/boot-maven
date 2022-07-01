@@ -5,13 +5,14 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ${package.Entity}.${entity};
 import ${package.Service}.${table.serviceName};
-import com.example.bootmaven.tools.response.R;
+import ${rootPackage}.tools.response.R;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.List;
-import com.example.bootmaven.vo.votransfer.${entity}Transfer;
-import com.example.bootmaven.vo.${entity}VO;
+import ${rootPackage}.vo.votransfer.${entity}Transfer;
+import ${rootPackage}.vo.${entity}VO;
+
 
 
 <#if restControllerStyle>

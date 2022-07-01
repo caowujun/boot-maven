@@ -1,4 +1,4 @@
-package com.example.bootmaven.vo;
+package ${rootPackage}.vo;
 
 <#list table.importPackages as pkg>
     import ${pkg};

@@ -18,3 +18,12 @@ spring:
         config:
           enabled: true
       connection-properties: config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJjVoNjug97bUT80hzrM761GNC4un1csTEff6QnPj4CAgWLDLYyuwoVfi+ll0+iMZRYR04gn52gE39H10BIOSrkCAwEAAQ==
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    clean-disabled: true
+    encoding: utf-8
+    locations: classpath：db/migration
+    sql-migration-prefix: V
+    sql-migration-separator: __
+    sql-migration-suffixes: .sql

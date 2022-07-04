@@ -1,5 +1,6 @@
 package com.example.bootmaven.entity;
 
+    import com.baomidou.mybatisplus.annotation.FieldFill;
     import com.baomidou.mybatisplus.annotation.TableField;
     import com.baomidou.mybatisplus.annotation.TableId;
     import com.baomidou.mybatisplus.annotation.TableName;
@@ -15,7 +16,7 @@ package com.example.bootmaven.entity;
     * </p>
 *
 * @author robin
-* @since 2022-06-29
+* @since 2022-07-04
 */
     @Data
     @TableName("runninglog")
@@ -33,13 +34,13 @@ package com.example.bootmaven.entity;
         @TableField("actiontype")
     private Integer actiontype;
 
-        @TableField("createat")
+            @TableField(value = "createat", fill = FieldFill.INSERT)
     private LocalDateTime createat;
 
         @TableField("createby")
     private String createby;
 
-        @TableField("updateat")
+            @TableField(value = "updateat", fill = FieldFill.UPDATE)
     private LocalDateTime updateat;
 
         @TableField("updateby")

@@ -50,8 +50,10 @@ public class FreemarkerTemplateEngineExtend extends FreemarkerTemplateEngine {
      */
     @Override
     public void writer(Map<String, Object> objectMap, String templatePath, File outputFile) throws Exception {
-//        TableInfo tableInfo= (TableInfo)objectMap.get("table");
-
+        TableInfo tableInfo = (TableInfo) objectMap.get("table");
+        String entityName = tableInfo.getEntityName();
+        String lowerEntityName = entityName.substring(0, 1).toLowerCase() + entityName.substring(1);
+        objectMap.put("lowerEntityName", lowerEntityName);
         super.writer(objectMap, templatePath, outputFile);
     }
 }

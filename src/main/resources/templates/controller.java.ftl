@@ -64,10 +64,10 @@ private ${entity}Transfer transfer;
 */
 @GetMapping(value = "page.do")
 @ApiOperation(value = "查询${entity}数据列表，带分页", notes = "查询${entity}数据列表，带分页")
-public R<Page<${entity}>> page(Page<${entity}> page, ${entity}  entity)
+public R<Page<${entity}>> page(Page<${entity}> page, ${entity}  ${lowerEntityName})
 {
 try{
-return success(this.i${entity}Service.page(page, new QueryWrapper<${entity}>(entity)));
+return success(this.i${entity}Service.page(page, new QueryWrapper<${entity}>( ${lowerEntityName})));
 } catch (Exception ex) {
 return failed(ex.getMessage());
 }
@@ -81,10 +81,10 @@ return failed(ex.getMessage());
 */
 @GetMapping(value = "listAll.do")
 @ApiOperation(value = "查询${entity}数据列表,不分页", notes = "查询${entity}数据列表,不分页")
-public R<List<${entity}>> listAll(${entity}  entity)
+public R<List<${entity}>> listAll(${entity}   ${lowerEntityName})
 {
 try{
-return success(this.i${entity}Service.list(new QueryWrapper<${entity}>(entity)));
+return success(this.i${entity}Service.list(new QueryWrapper<${entity}>( ${lowerEntityName})));
 } catch (Exception ex) {
 return failed(ex.getMessage());
 }
@@ -115,10 +115,10 @@ return failed(ex.getMessage());
 */
 @PostMapping(value = "insert.do")
 @ApiOperation(value = "${entity}数据新增", notes = "${entity}数据新增")
-public R<Boolean> save(@RequestBody ${entity} entity)
+public R<Boolean> save(@RequestBody ${entity}  ${lowerEntityName})
 {
 try{
-return success(this.i${entity}Service.save(entity));
+return success(this.i${entity}Service.save( ${lowerEntityName}));
 } catch (Exception ex) {
 return failed(ex.getMessage());
 }
@@ -132,9 +132,9 @@ return failed(ex.getMessage());
 */
 @PostMapping(value = "update.do")
 @ApiOperation(value = "${entity}数据更新", notes = "{entity}数据更新")
-public R<Boolean> update(@RequestBody ${entity} entity) {
+public R<Boolean> update(@RequestBody ${entity}  ${lowerEntityName}) {
 try{
-return success(this.i${entity}Service.updateById(entity));
+return success(this.i${entity}Service.updateById( ${lowerEntityName}));
 } catch (Exception ex) {
 return failed(ex.getMessage());
 }

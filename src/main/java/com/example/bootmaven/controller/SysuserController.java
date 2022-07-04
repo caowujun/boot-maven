@@ -56,9 +56,9 @@ public class SysuserController extends BaseController {
      */
     @GetMapping(value = "page.do")
     @ApiOperation(value = "查询Sysuser数据列表，带分页", notes = "查询Sysuser数据列表，带分页")
-    public R<Page<Sysuser>> page(Page<Sysuser> page, Sysuser entity) {
+    public R<Page<Sysuser>> page(Page<Sysuser> page, Sysuser sysuser) {
         try {
-            return success(this.iSysuserService.page(page, new QueryWrapper<Sysuser>(entity)));
+            return success(this.iSysuserService.page(page, new QueryWrapper<Sysuser>(sysuser)));
         } catch (Exception ex) {
             return failed(ex.getMessage());
         }
@@ -72,9 +72,9 @@ public class SysuserController extends BaseController {
      */
     @GetMapping(value = "listAll.do")
     @ApiOperation(value = "查询Sysuser数据列表,不分页", notes = "查询Sysuser数据列表,不分页")
-    public R<List<Sysuser>> listAll(Sysuser entity) {
+    public R<List<Sysuser>> listAll(Sysuser sysuser) {
         try {
-            return success(this.iSysuserService.list(new QueryWrapper<Sysuser>(entity)));
+            return success(this.iSysuserService.list(new QueryWrapper<Sysuser>(sysuser)));
         } catch (Exception ex) {
             return failed(ex.getMessage());
         }
@@ -104,9 +104,9 @@ public class SysuserController extends BaseController {
      */
     @PostMapping(value = "insert.do")
     @ApiOperation(value = "Sysuser数据新增", notes = "Sysuser数据新增")
-    public R<Boolean> save(@RequestBody Sysuser entity) {
+    public R<Boolean> save(@RequestBody Sysuser sysuser) {
         try {
-            return success(this.iSysuserService.save(entity));
+            return success(this.iSysuserService.save(sysuser));
         } catch (Exception ex) {
             return failed(ex.getMessage());
         }
@@ -120,9 +120,9 @@ public class SysuserController extends BaseController {
      */
     @PostMapping(value = "update.do")
     @ApiOperation(value = "Sysuser数据更新", notes = "{entity}数据更新")
-    public R<Boolean> update(@RequestBody Sysuser entity) {
+    public R<Boolean> update(@RequestBody Sysuser sysuser) {
         try {
-            return success(this.iSysuserService.updateById(entity));
+            return success(this.iSysuserService.updateById(sysuser));
         } catch (Exception ex) {
             return failed(ex.getMessage());
         }

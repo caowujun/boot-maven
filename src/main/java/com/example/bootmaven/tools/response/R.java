@@ -36,7 +36,9 @@ public class R<T> implements Serializable {
     public static <T> R<T> failed(String msg) {
         return restResult(null, ResponseCode.FAILED.getCode(), msg);
     }
-
+    public static <T> R<T> failed(long code,String msg) {
+        return restResult(null, code, msg);
+    }
     public static <T> R<T> failed(IErrorCode errorCode) {
         return restResult(null, errorCode);
     }

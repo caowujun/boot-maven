@@ -1,7 +1,9 @@
-package com.example.bootmaven.config;
+package com.example.bootmaven.config.interceptor;
 
 import cn.hutool.jwt.JWTUtil;
+import cn.hutool.log.StaticLog;
 import com.alibaba.druid.wall.violation.ErrorCode;
+import com.example.bootmaven.config.GlobalValue;
 import com.example.bootmaven.tools.JsonUtils;
 import com.example.bootmaven.tools.response.R;
 import org.springframework.context.annotation.Configuration;
@@ -40,6 +42,7 @@ public class HandlerInterceptorAdapter implements HandlerInterceptor {
             // response.setCharacterEncoding("utf-8");//返回？？？使用这一行可以解决,或者用下面这行
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().print(R.failed("没有权限"));
+            StaticLog.info("您没有权限，拒绝访问!.", "WARN");
             return false;
         }
     }

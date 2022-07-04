@@ -39,4 +39,19 @@ public class FreemarkerTemplateEngineExtend extends FreemarkerTemplateEngine {
             this.outputFile(new File(fileName), objectMap, value);
         });
     }
+
+    /*
+     * @author robin
+     * @description 重写write方法这种方式适用于定义需要处理plus自带数据才能得到的数据。比如依赖注入的对象名首字母小写，这种在配置map时是无法处理的，因为plus的默认数据都还没有
+     * @date 2022/7/4 8:40
+     * @param objectMap
+     * @param templatePath
+     * @param outputFile
+     */
+    @Override
+    public void writer(Map<String, Object> objectMap, String templatePath, File outputFile) throws Exception {
+//        TableInfo tableInfo= (TableInfo)objectMap.get("table");
+
+        super.writer(objectMap, templatePath, outputFile);
+    }
 }

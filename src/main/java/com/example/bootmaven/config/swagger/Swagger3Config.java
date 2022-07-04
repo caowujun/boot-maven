@@ -1,4 +1,4 @@
-package com.example.bootmaven.config;
+package com.example.bootmaven.config.swagger;
 
 
 

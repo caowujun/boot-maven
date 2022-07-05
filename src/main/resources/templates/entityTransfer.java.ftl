@@ -1,7 +1,7 @@
-package com.example.bootmaven.vo.votransfer;
+package ${rootPackage}.vo.votransfer;
 
 import org.mapstruct.Mapper;
-import com.example.bootmaven.vo.${entity}VO;
+import ${rootPackage}.vo.${entity}VO;
 import ${package.Entity}.${entity};
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

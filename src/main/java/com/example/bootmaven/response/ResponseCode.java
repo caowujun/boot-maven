@@ -1,9 +1,10 @@
-package com.example.bootmaven.tools.response;
+package com.example.bootmaven.response;
 
 
 public enum ResponseCode implements IErrorCode {
     FAILED(-1L, "操作失败"),
     SUCCESS(0L, "执行成功");
+//    PARAMATERNOTALLOWED(401, "参数不被允许");
 
     private final long code;
     private final String msg;

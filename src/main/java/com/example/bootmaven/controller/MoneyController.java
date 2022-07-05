@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.bootmaven.entity.Money;
 import com.example.bootmaven.service.IMoneyService;
-import com.example.bootmaven.tools.response.R;
+import com.example.bootmaven.response.R;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,6 @@ import javax.annotation.Resource;
 import java.util.List;
 
 import com.example.bootmaven.vo.votransfer.MoneyTransfer;
-import com.example.bootmaven.vo.MoneyVO;
 
 
 import com.example.bootmaven.BaseController;
@@ -24,7 +23,7 @@ import com.example.bootmaven.BaseController;
  * </p>
  *
  * @author robin
- * @since 2022-06-29
+ * @since 2022-07-04
  */
 @RestController
 @RequestMapping("/money")
@@ -47,9 +46,9 @@ public class MoneyController extends BaseController {
      */
     @GetMapping(value = "page.do")
     @ApiOperation(value = "查询Money数据列表，带分页", notes = "查询Money数据列表，带分页")
-    public R<Page<Money>> page(Page<Money> page, Money entity) {
+    public R<Page<Money>> page(Page<Money> page, Money money) {
         try {
-            return success(this.iMoneyService.page(page, new QueryWrapper<Money>(entity)));
+            return success(this.iMoneyService.page(page, new QueryWrapper<Money>(money)));
         } catch (Exception ex) {
             return failed(ex.getMessage());
         }
@@ -63,9 +62,9 @@ public class MoneyController extends BaseController {
      */
     @GetMapping(value = "listAll.do")
     @ApiOperation(value = "查询Money数据列表,不分页", notes = "查询Money数据列表,不分页")
-    public R<List<Money>> listAll(Money entity) {
+    public R<List<Money>> listAll(Money money) {
         try {
-            return success(this.iMoneyService.list(new QueryWrapper<Money>(entity)));
+            return success(this.iMoneyService.list(new QueryWrapper<Money>(money)));
         } catch (Exception ex) {
             return failed(ex.getMessage());
         }
@@ -95,9 +94,9 @@ public class MoneyController extends BaseController {
      */
     @PostMapping(value = "insert.do")
     @ApiOperation(value = "Money数据新增", notes = "Money数据新增")
-    public R<Boolean> save(@RequestBody Money entity) {
+    public R<Boolean> save(@RequestBody Money money) {
         try {
-            return success(this.iMoneyService.save(entity));
+            return success(this.iMoneyService.save(money));
         } catch (Exception ex) {
             return failed(ex.getMessage());
         }
@@ -111,9 +110,9 @@ public class MoneyController extends BaseController {
      */
     @PostMapping(value = "update.do")
     @ApiOperation(value = "Money数据更新", notes = "{entity}数据更新")
-    public R<Boolean> update(@RequestBody Money entity) {
+    public R<Boolean> update(@RequestBody Money money) {
         try {
-            return success(this.iMoneyService.updateById(entity));
+            return success(this.iMoneyService.updateById(money));
         } catch (Exception ex) {
             return failed(ex.getMessage());
         }

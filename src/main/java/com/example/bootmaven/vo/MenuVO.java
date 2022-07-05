@@ -1,58 +1,60 @@
 package com.example.bootmaven.vo;
 
-    import com.baomidou.mybatisplus.annotation.TableField;
-    import com.baomidou.mybatisplus.annotation.TableId;
-    import com.baomidou.mybatisplus.annotation.TableName;
-    import java.io.Serializable;
-    import java.time.LocalDateTime;
-    import io.swagger.annotations.ApiModel;
-    import lombok.Data;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+import io.swagger.annotations.ApiModel;
+import lombok.Data;
 
 /**
-* <p>
-    * 菜单
-    * </p>
-*
-* @author robin
-* @since 2022-06-29
-*/
-    @Data
-    @ApiModel(value = "Menu对象", description = "菜单")
-    public class MenuVO implements Serializable {
+ * <p>
+ * 菜单
+ * </p>
+ *
+ * @author robin
+ * @since 2022-07-01
+ */
+@Data
+@ApiModel(value = "Menu对象", description = "菜单")
+public class MenuVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-            @TableId("id")
+    @TableId("id")
     private String id;
 
-        @TableField("parentid")
+    @TableField("parentid")
     private String parentid;
 
-        @TableField("title")
+    @TableField("title")
     private String title;
 
-        @TableField("actionurl")
+    @TableField("actionurl")
     private String actionurl;
 
-        @TableField("status")
+    @TableField("status")
     private Integer status;
 
-        @TableField("sortindex")
+    @TableField("sortindex")
     private Integer sortindex;
 
-        @TableField("icon")
+    @TableField("icon")
     private String icon;
 
-        @TableField("createat")
-    private LocalDateTime createat;
+    @TableField("createat")
+    private String createat;
 
-        @TableField("createby")
+    @TableField("createby")
     private String createby;
 
-        @TableField("updateat")
-    private LocalDateTime updateat;
+    @TableField("updateat")
+    private String updateat;
 
-        @TableField("updateby")
+    @TableField("updateby")
     private String updateby;
 
 

@@ -1,4 +1,4 @@
-package com.example.bootmaven.vo;
+package ${rootPackage}.vo;
 
 <#list table.importPackages as pkg>
     import ${pkg};
@@ -89,7 +89,12 @@ package com.example.bootmaven.vo;
     <#if field.logicDeleteField>
         @TableLogic
     </#if>
-    private ${field.propertyType} ${field.propertyName};
+<#--    日期字段改string-->
+        <#if field.propertyName="createat"||field.propertyName="updateat">
+        private String ${field.propertyName};
+      <#else >
+        private ${field.propertyType} ${field.propertyName};
+    </#if>
 </#list>
 <#------------  END 字段循环遍历  ---------->
 

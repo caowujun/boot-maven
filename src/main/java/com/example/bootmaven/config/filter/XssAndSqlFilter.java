@@ -2,7 +2,10 @@ package com.example.bootmaven.config.filter;
 
 
 import cn.hutool.json.JSONUtil;
+import cn.hutool.log.Log;
+import cn.hutool.log.LogFactory;
 import cn.hutool.log.StaticLog;
+import cn.hutool.log.level.Level;
 import com.example.bootmaven.config.GlobalValue;
 import com.example.bootmaven.response.R;
 import org.apache.commons.lang3.StringUtils;
@@ -24,9 +27,12 @@ import java.io.PrintWriter;
 @WebFilter(urlPatterns = "/*", filterName = "xssAndSqlFilter", dispatcherTypes = DispatcherType.REQUEST)
 @Component
 public class XssAndSqlFilter implements Filter {
+    //推荐创建不可变静态类成员变量
+    private static final Log log = LogFactory.get();
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        log.log(Level.INFO, "init");
     }
 
     @Override

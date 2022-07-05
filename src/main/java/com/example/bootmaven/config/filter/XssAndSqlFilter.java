@@ -4,7 +4,7 @@ package com.example.bootmaven.config.filter;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.log.StaticLog;
 import com.example.bootmaven.config.GlobalValue;
-import com.example.bootmaven.tools.response.R;
+import com.example.bootmaven.response.R;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

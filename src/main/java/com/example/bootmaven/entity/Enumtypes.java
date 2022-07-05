@@ -1,61 +1,63 @@
 package com.example.bootmaven.entity;
 
-    import com.baomidou.mybatisplus.annotation.FieldFill;
-    import com.baomidou.mybatisplus.annotation.TableField;
-    import com.baomidou.mybatisplus.annotation.TableId;
-    import com.baomidou.mybatisplus.annotation.TableName;
-    import java.io.Serializable;
-    import java.time.LocalDateTime;
-    import io.swagger.annotations.ApiModel;
-    import io.swagger.annotations.ApiModelProperty;
-    import lombok.Data;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
-* <p>
-    * 枚举配置
-    * </p>
-*
-* @author robin
-* @since 2022-07-04
-*/
-    @Data
-    @TableName("enumtypes")
-    @ApiModel(value = "Enumtypes对象", description = "枚举配置")
-    public class Enumtypes implements Serializable {
+ * <p>
+ * 枚举配置
+ * </p>
+ *
+ * @author robin
+ * @since 2022-07-04
+ */
+@Data
+@TableName("enumtypes")
+@ApiModel(value = "Enumtypes对象", description = "枚举配置")
+public class Enumtypes implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-            @TableId("id")
+    @TableId("id")
     private String id;
 
-        @TableField("parentid")
+    @TableField("parentid")
     private String parentid;
 
-        @TableField("enumname")
+    @TableField("enumname")
     private String enumname;
 
-        @TableField("enumvalue")
+    @TableField("enumvalue")
     private String enumvalue;
 
-        @TableField("enumtype")
+    @TableField("enumtype")
     private String enumtype;
 
-        @TableField("description")
+    @TableField("description")
     private String description;
 
-        @TableField("status")
+    @TableField("status")
     private Integer status;
 
-            @TableField(value = "createat", fill = FieldFill.INSERT)
+    @TableField(value = "createat", fill = FieldFill.INSERT)
     private LocalDateTime createat;
 
-        @TableField("createby")
+    @TableField("createby")
     private String createby;
 
-            @TableField(value = "updateat", fill = FieldFill.UPDATE)
+    @TableField(value = "updateat", fill = FieldFill.UPDATE)
     private LocalDateTime updateat;
 
-        @TableField("updateby")
+    @TableField("updateby")
     private String updateby;
 
 

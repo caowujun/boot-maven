@@ -1,7 +1,7 @@
 package com.example.bootmaven;
 
-import com.example.bootmaven.tools.response.IErrorCode;
-import com.example.bootmaven.tools.response.R;
+import com.example.bootmaven.response.IErrorCode;
+import com.example.bootmaven.response.R;
 
 /**
  * @author robin

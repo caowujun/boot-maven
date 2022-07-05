@@ -2,10 +2,8 @@ package com.example.bootmaven.config.interceptor;
 
 import cn.hutool.jwt.JWTUtil;
 import cn.hutool.log.StaticLog;
-import com.alibaba.druid.wall.violation.ErrorCode;
 import com.example.bootmaven.config.GlobalValue;
-import com.example.bootmaven.tools.JsonUtils;
-import com.example.bootmaven.tools.response.R;
+import com.example.bootmaven.response.R;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;

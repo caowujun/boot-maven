@@ -1,4 +1,4 @@
-package com.example.bootmaven.tools.response;
+package com.example.bootmaven.response;
 
 import java.io.Serializable;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.example.bootmaven.tools.response;
+package com.example.bootmaven.response;
 
 public interface IErrorCode {
     long getCode();

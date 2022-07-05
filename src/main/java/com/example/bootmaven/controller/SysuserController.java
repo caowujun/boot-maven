@@ -1,16 +1,14 @@
 package com.example.bootmaven.controller;
 
 import cn.hutool.jwt.JWTUtil;
-import com.alibaba.druid.wall.violation.ErrorCode;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.bootmaven.config.GlobalValue;
-import com.example.bootmaven.tools.response.IErrorCode;
-import com.example.bootmaven.tools.response.ResponseCode;
+import com.example.bootmaven.response.ResponseCode;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.bootmaven.entity.Sysuser;
 import com.example.bootmaven.service.ISysuserService;
-import com.example.bootmaven.tools.response.R;
+import com.example.bootmaven.response.R;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.bootmaven.vo.votransfer.SysuserTransfer;
-import com.example.bootmaven.vo.SysuserVO;
 
 
 import com.example.bootmaven.BaseController;
@@ -167,7 +164,7 @@ public class SysuserController extends BaseController {
      * @param sysuser
      * @param request
      * @param response
-     * @return com.example.bootmaven.tools.response.R<?>
+     * @return com.example.bootmaven.test.R<?>
      */
     @PostMapping(value = "login.do")
     @ApiOperation(value = "登录", notes = "根据账号密码登录")

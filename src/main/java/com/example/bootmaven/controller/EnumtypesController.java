@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 import com.example.bootmaven.vo.votransfer.EnumtypesTransfer;
+import com.example.bootmaven.vo.EnumtypesVO;
 
 
 import com.example.bootmaven.BaseController;
@@ -23,7 +24,7 @@ import com.example.bootmaven.BaseController;
  * </p>
  *
  * @author robin
- * @since 2022-07-04
+ * @since 2022-07-05
  */
 @RestController
 @RequestMapping("/enumtypes")
@@ -40,8 +41,8 @@ public class EnumtypesController extends BaseController {
     /**
      * 分页查询所有数据
      *
-     * @param page   分页对象
-     * @param entity 查询实体
+     * @param page      分页对象
+     * @param enumtypes 查询实体
      * @return 所有数据
      */
     @GetMapping(value = "page.do")
@@ -57,7 +58,7 @@ public class EnumtypesController extends BaseController {
     /**
      * 查询所有数据
      *
-     * @param entity 查询实体
+     * @param enumtypes 查询实体
      * @return 所有数据
      */
     @GetMapping(value = "listAll.do")
@@ -89,7 +90,7 @@ public class EnumtypesController extends BaseController {
     /**
      * 新增数据
      *
-     * @param entity 实体对象
+     * @param enumtypes 实体对象
      * @return 新增结果
      */
     @PostMapping(value = "insert.do")
@@ -105,7 +106,7 @@ public class EnumtypesController extends BaseController {
     /**
      * 修改数据
      *
-     * @param entity 实体对象
+     * @param enumtypes 实体对象
      * @return 修改结果
      */
     @PostMapping(value = "update.do")

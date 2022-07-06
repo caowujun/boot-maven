@@ -13,6 +13,8 @@ import javax.annotation.Resource;
 @Configuration
 public class SpringMvcSupport implements WebMvcConfigurer {
 
+
+    //过滤器与拦截器原理    https://blog.csdn.net/weixin_45433031/article/details/125614080
     @Resource
     HandlerInterceptorAdapter handlerInterceptorAdapter;
 
@@ -28,14 +30,15 @@ public class SpringMvcSupport implements WebMvcConfigurer {
                 "/sysuser/login.do",
                 "/swagger-resources/**",
                 "/webjars/**",
-//                "/v2/**",
+                "/v2/**",
                 "/v3/**",
                 "/swagger-ui/**",
                 "/api",
-//                "/api-docs",
-//                "/api-docs/**",
+                "/api-docs",
+                "/api-docs/**",
                 "/doc.html",
-                "/doc.html/**"
+                "/doc.html/**",
+                "***/error"
         };
         registry.addInterceptor(handlerInterceptorAdapter)
                 .addPathPatterns("/**")

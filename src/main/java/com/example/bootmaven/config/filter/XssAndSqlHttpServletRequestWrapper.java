@@ -3,7 +3,9 @@ package com.example.bootmaven.config.filter;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HtmlUtil;
 import cn.hutool.json.JSON;
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
@@ -23,7 +25,7 @@ import java.util.regex.Pattern;
 public class XssAndSqlHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     HttpServletRequest httpServletRequest = null;
-
+//    private String body;
     private static final Set<String> notAllowedKeyWords = new HashSet<String>(0);
     static {
         String key = "and|exec|insert|select|delete|update|count|*|%|chr|mid|master|truncate|char|declare|;|or|-|+";
@@ -31,9 +33,10 @@ public class XssAndSqlHttpServletRequestWrapper extends HttpServletRequestWrappe
         notAllowedKeyWords.addAll(Arrays.asList(keyStr));
     }
 
-    public XssAndSqlHttpServletRequestWrapper(HttpServletRequest request) {
+    public XssAndSqlHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
         super(request);
         httpServletRequest = request;
+
     }
 
 
@@ -217,18 +220,6 @@ public class XssAndSqlHttpServletRequestWrapper extends HttpServletRequestWrappe
         }
         return false;
     }
-//    public boolean checkSqlKeyWords(String value) {
-//        String paramValue = value;
-//        for (String keyword : notAllowedKeyWords) {
-//            if (paramValue.length() > keyword.length() + 4
-//                    && (paramValue.contains(" " + keyword) || paramValue.contains(keyword + " ") || paramValue.contains(" " + keyword + " "))) {
-////                log.error(this.getRequestURI() + "，参数异常，包含sql的关键词(" + keyword + ")");
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
     public final boolean checkParameter() {
         Map<String, String[]> submitParams = new HashMap(super.getParameterMap());
         Set<String> submitNames = submitParams.keySet();
@@ -236,7 +227,7 @@ public class XssAndSqlHttpServletRequestWrapper extends HttpServletRequestWrappe
             Object submitValues = submitParams.get(submitName);
             if ((submitValues != null)) {
                 for (String submitValue : (String[]) submitValues) {
-                    if (checkXSSAndSql(submitValue)) {
+                    if (checkXSSAndSql(HtmlUtil.filter(submitValue))) {
                         return true;
                     }
                 }

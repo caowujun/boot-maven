@@ -1,6 +1,9 @@
 package com.example.bootmaven.config.interceptor;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
+import cn.hutool.jwt.JWTValidator;
 import cn.hutool.log.StaticLog;
 import com.example.bootmaven.config.GlobalValue;
 import com.example.bootmaven.response.R;
@@ -11,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 /**
  * @author robin
@@ -33,7 +37,8 @@ public class HandlerInterceptorAdapter implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader("Authorization");
-        boolean result = StringUtils.hasLength(token) && JWTUtil.verify(token, GlobalValue.TOKEN_SECRET);
+
+        boolean result = StringUtils.hasLength(token) && JWTUtil.verify(token, GlobalValue.TOKEN_SECRET) && JWTUtil.parseToken(token).validate(0);
         if (result) {
             return true;
         } else {

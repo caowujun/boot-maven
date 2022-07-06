@@ -35,9 +35,22 @@ public class XssAndSqlFilter implements Filter {
         log.log(Level.INFO, "init");
     }
 
+//    1. GET 传递, 参数可以直接通过request.getParameter获取。
+//    2. Post 传递,产生不能过直接从request.getInputStream() 读取，必须要进行重新写。（request.getInputStream()只能够读取一次）
+//    方式：通过重写 HttpServletRequestWrapper 类 获取getInputStream中的流数据，然后在将body数据进行重新写入传递下去。
+    /*
+     * @author robin
+     * @description
+     *
+     * @date 2022/7/6 14:04
+     * @param request
+     * @param response
+     * @param chain
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
+        ServletOutputStream outputStream = response.getOutputStream();
         String method = "GET";//设置初始值
         String param = "";
         XssAndSqlHttpServletRequestWrapper xssRequest = null;
@@ -45,35 +58,33 @@ public class XssAndSqlFilter implements Filter {
             method = ((HttpServletRequest) request).getMethod();//得到请求URL地址时使用的方法
             xssRequest = new XssAndSqlHttpServletRequestWrapper((HttpServletRequest) request);//创建对象
         }
-        if ("POST".equalsIgnoreCase(method)) {//判断是否为post
-            param = getBodyString(xssRequest.getReader());//获取参数
-            if (StringUtils.isNotBlank(param)) {//等价于 str != null && str.length > 0 && str.trim().length > 0
-                if (xssRequest.checkXSSAndSql(param)) {//进行参数审查
-                    response.setCharacterEncoding("UTF-8");
-                    response.setContentType("application/json;charset=UTF-8");
-                    PrintWriter out = response.getWriter();
-                    StaticLog.info("您所访问的页面请求中有违反安全规则元素存在，拒绝访问!.", "ERROR");
-                    out.write(JSONUtil.toJsonStr(R.failed(GlobalValue.PARAMATERNOTALLOWED, "您所访问的页面请求中有违反安全规则元素存在，拒绝访问!")));
-                    return;
-                }
-            }
-        }
-        /*
-         * 检查参数的时候 同时检查请求的方法
-         * 只检查get请求方法和post请求方法的的参数的数据是否合法
-         * 并不是所有参数都要检查，首先必须是一个get或者post，再去校验参数
-         * 因为PUT方法在进行参数审查的时候没办法通过所以直接过滤掉
-         */
         assert xssRequest != null;
-        if (xssRequest.checkParameter() && (method.equals("POST") || method.equals("GET"))) {
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("application/json;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            StaticLog.info("您所访问的页面请求中有违反安全规则元素存在，拒绝访问!.", "ERROR");
-            out.write(JSONUtil.toJsonStr(R.failed(GlobalValue.PARAMATERNOTALLOWED, "您所访问的页面请求中有违反安全规则元素存在，拒绝访问!")));
-            return;
+        if (xssRequest.checkParameter()) {
+            throwError(outputStream, "");
+        } else {
+            chain.doFilter(xssRequest, response);
         }
-        chain.doFilter(xssRequest, response);
+//        if ("POST".equalsIgnoreCase(method)) {//判断是否为post
+//            param = getBodyString(xssRequest.getReader());//获取参数
+//            if (StringUtils.isNotBlank(param) && (xssRequest.checkXSSAndSql(param) || xssRequest.checkParameter())) {//等价于 str != null && str.length > 0 && str.trim().length > 0
+//                throwError(outputStream, param);
+//            } else
+//                chain.doFilter(new XssAndSqlHttpServletRequestWrapper((HttpServletRequest) request), response);
+//        } else if (method.equals("GET")) {
+//            if (xssRequest.checkParameter())
+//                throwError(outputStream, "");
+//            else
+//                chain.doFilter(xssRequest, response);
+//        } else {
+//            chain.doFilter(xssRequest, response);
+//        }
+    }
+
+
+    public static void throwError(ServletOutputStream outputStream, String param) throws IOException {
+        StaticLog.info("您所访问的页面请求中有违反安全规则元素存在，拒绝访问!.[]==" + param, "ERROR");
+        outputStream.write("您所访问的页面请求中有违反安全规则元素存在，拒绝访问!.".getBytes());
+        outputStream.flush();
     }
 
     // 获取request请求body中参数

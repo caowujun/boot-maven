@@ -59,7 +59,7 @@ private ${entity}Transfer transfer;
 * 分页查询所有数据
 *
 * @param page 分页对象
-* @param entity 查询实体
+* @param ${lowerEntityName} 查询实体
 * @return 所有数据
 */
 @GetMapping(value = "page.do")
@@ -76,7 +76,7 @@ return failed(ex.getMessage());
 /**
 * 查询所有数据
 *
-* @param entity 查询实体
+* @param ${lowerEntityName} 查询实体
 * @return 所有数据
 */
 @GetMapping(value = "listAll.do")
@@ -110,7 +110,7 @@ return failed(ex.getMessage());
 /**
 * 新增数据
 *
-* @param entity 实体对象
+* @param ${lowerEntityName} 实体对象
 * @return 新增结果
 */
 @PostMapping(value = "insert.do")
@@ -127,7 +127,7 @@ return failed(ex.getMessage());
 /**
 * 修改数据
 *
-* @param entity 实体对象
+* @param ${lowerEntityName} 实体对象
 * @return 修改结果
 */
 @PostMapping(value = "update.do")

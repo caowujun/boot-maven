@@ -48,7 +48,7 @@ public class SysuserController extends BaseController {
      * 分页查询所有数据
      *
      * @param page   分页对象
-     * @param entity 查询实体
+     * @param sysuser 查询实体
      * @return 所有数据
      */
     @GetMapping(value = "page.do")
@@ -64,7 +64,7 @@ public class SysuserController extends BaseController {
     /**
      * 查询所有数据
      *
-     * @param entity 查询实体
+     * @param sysuser 查询实体
      * @return 所有数据
      */
     @GetMapping(value = "listAll.do")
@@ -96,7 +96,7 @@ public class SysuserController extends BaseController {
     /**
      * 新增数据
      *
-     * @param entity 实体对象
+     * @param sysuser 实体对象
      * @return 新增结果
      */
     @PostMapping(value = "insert.do")
@@ -112,7 +112,7 @@ public class SysuserController extends BaseController {
     /**
      * 修改数据
      *
-     * @param entity 实体对象
+     * @param sysuser 实体对象
      * @return 修改结果
      */
     @PostMapping(value = "update.do")
@@ -182,7 +182,8 @@ public class SysuserController extends BaseController {
                         put("cnname", finalSysuser.getCnname());
                         put("expire_time", System.currentTimeMillis() + 120 * 60 * 1000);
                     }
-                };
+                }   ;
+
                 String token = JWTUtil.createToken(map, GlobalValue.TOKEN_SECRET);
                 System.out.print(token);
                 response.addHeader("token", token);

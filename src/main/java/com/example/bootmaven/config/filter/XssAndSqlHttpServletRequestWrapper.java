@@ -5,6 +5,7 @@ import cn.hutool.http.HtmlUtil;
 import cn.hutool.json.JSON;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.google.common.base.Charsets;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.ReadListener;
@@ -25,7 +26,7 @@ import java.util.regex.Pattern;
 public class XssAndSqlHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     HttpServletRequest httpServletRequest = null;
-//    private String body;
+    private String body;
     private static final Set<String> notAllowedKeyWords = new HashSet<String>(0);
     static {
         String key = "and|exec|insert|select|delete|update|count|*|%|chr|mid|master|truncate|char|declare|;|or|-|+";
@@ -36,7 +37,32 @@ public class XssAndSqlHttpServletRequestWrapper extends HttpServletRequestWrappe
     public XssAndSqlHttpServletRequestWrapper(HttpServletRequest request) throws IOException {
         super(request);
         httpServletRequest = request;
-
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = null;
+        try {
+            InputStream inputStream = request.getInputStream();
+            if (inputStream != null) {
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+                char[] charBuffer = new char[128];
+                int bytesRead = -1;
+                while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+                    stringBuilder.append(charBuffer, 0, bytesRead);
+                }
+            } else {
+                stringBuilder.append("");
+            }
+        } catch (IOException ex) {
+            throw ex;
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException ex) {
+                    throw ex;
+                }
+            }
+        }
+        body = stringBuilder.toString();
     }
 
 
@@ -236,6 +262,10 @@ public class XssAndSqlHttpServletRequestWrapper extends HttpServletRequestWrappe
         return false;
     }
 
+    public String getBody() {
+        return this.body;
+    }
+
     /*
      * @author robin
      * @description
@@ -244,56 +274,90 @@ public class XssAndSqlHttpServletRequestWrapper extends HttpServletRequestWrappe
      */
     @Override
     public BufferedReader getReader() throws IOException {
-        return new BufferedReader(new InputStreamReader(getInputStream()));
+        return new BufferedReader(new InputStreamReader(this.getInputStream(), StandardCharsets.UTF_8));
     }
-
-
     @Override
     public ServletInputStream getInputStream() throws IOException {
-        InputStream in = super.getInputStream();
-        StringBuilder body = new StringBuilder();
-        InputStreamReader reader = new InputStreamReader(in, StandardCharsets.UTF_8);
-        BufferedReader buffer = new BufferedReader(reader);
-        String line = buffer.readLine();
-        while (line != null) {
-            body.append(line);
-            line = buffer.readLine();
-        }
-        buffer.close();
-        reader.close();
-        in.close();
-        Map<String, Object> map = JSONUtil.parseObj(body.toString());
-        Map<String, Object> resultMap = new HashMap<String, Object>(map.size());
-        for (String key : map.keySet()) {
-            Object val = map.get(key);
-            if (map.get(key) instanceof String) {
-                resultMap.put(key, HtmlUtil.filter(val.toString()));
-            } else {
-                resultMap.put(key, val);
-            }
-        }
-        String str = JSONUtil.toJsonStr(resultMap);
-        final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(str.getBytes());
-        return new ServletInputStream() {
-            @Override
-            public int read() throws IOException {
-                return byteArrayInputStream.read();
-            }
-
+        final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8));
+        ServletInputStream servletInputStream = new ServletInputStream() {
             @Override
             public boolean isFinished() {
                 return false;
             }
-
             @Override
             public boolean isReady() {
                 return false;
             }
-
             @Override
-            public void setReadListener(ReadListener listener) {
+            public void setReadListener(ReadListener readListener) {
+            }
+            @Override
+            public int read() throws IOException {
+                return byteArrayInputStream.read();
             }
         };
+        return servletInputStream;
     }
+    /**
+     * 设置自定义post参数 //
+     *
+     * @param paramMaps
+     * @return
+     */
+    public void setParamsMaps(Map paramMaps) {
+        Map paramBodyMap = new HashMap<String,Object>();
+        if (!StringUtils.isEmpty(body)) {
+            paramBodyMap =JSONUtil.toBean(body, Map.class);
+        }
+        paramBodyMap.putAll(paramMaps);
+        body = JSONUtil.toJsonStr(paramBodyMap);
+    }
+//    @Override
+//    public ServletInputStream getInputStream() throws IOException {
+//        InputStream in = super.getInputStream();
+//        StringBuilder body = new StringBuilder();
+//        InputStreamReader reader = new InputStreamReader(in, StandardCharsets.UTF_8);
+//        BufferedReader buffer = new BufferedReader(reader);
+//        String line = buffer.readLine();
+//        while (line != null) {
+//            body.append(line);
+//            line = buffer.readLine();
+//        }
+//        buffer.close();
+//        reader.close();
+//        in.close();
+//        Map<String, Object> map = JSONUtil.parseObj(body.toString());
+//        Map<String, Object> resultMap = new HashMap<String, Object>(map.size());
+//        for (String key : map.keySet()) {
+//            Object val = map.get(key);
+//            if (map.get(key) instanceof String) {
+//                resultMap.put(key, HtmlUtil.filter(val.toString()));
+//            } else {
+//                resultMap.put(key, val);
+//            }
+//        }
+//        String str = JSONUtil.toJsonStr(resultMap);
+//        final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(str.getBytes());
+//        return new ServletInputStream() {
+//            @Override
+//            public int read() throws IOException {
+//                return byteArrayInputStream.read();
+//            }
+//
+//            @Override
+//            public boolean isFinished() {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean isReady() {
+//                return false;
+//            }
+//
+//            @Override
+//            public void setReadListener(ReadListener listener) {
+//            }
+//        };
+//    }
 
 }

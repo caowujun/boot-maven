@@ -17,6 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 /**
  * @author robin
@@ -35,7 +39,7 @@ public class XssAndSqlFilter implements Filter {
         log.log(Level.INFO, "init");
     }
 
-//    1. GET 传递, 参数可以直接通过request.getParameter获取。
+    //    1. GET 传递, 参数可以直接通过request.getParameter获取。
 //    2. Post 传递,产生不能过直接从request.getInputStream() 读取，必须要进行重新写。（request.getInputStream()只能够读取一次）
 //    方式：通过重写 HttpServletRequestWrapper 类 获取getInputStream中的流数据，然后在将body数据进行重新写入传递下去。
     /*
@@ -52,32 +56,42 @@ public class XssAndSqlFilter implements Filter {
             throws IOException, ServletException {
         ServletOutputStream outputStream = response.getOutputStream();
         String method = "GET";//设置初始值
-        String param = "";
         XssAndSqlHttpServletRequestWrapper xssRequest = null;
         if (request instanceof HttpServletRequest) {//判断左边的对象是否是它右边对象的实例
             method = ((HttpServletRequest) request).getMethod();//得到请求URL地址时使用的方法
+            // 防止流读取一次后就没有了, 所以需要将流继续写出去
             xssRequest = new XssAndSqlHttpServletRequestWrapper((HttpServletRequest) request);//创建对象
         }
-        assert xssRequest != null;
-        if (xssRequest.checkParameter()) {
-            throwError(outputStream, "");
+        TreeMap paramsMaps = new TreeMap();
+
+        if ("POST".equalsIgnoreCase(method)) {//判断是否为post
+
+            String body = xssRequest.getBody();
+            paramsMaps = JSONUtil.toBean(body, TreeMap.class);
+            if (StringUtils.isNotBlank(body) && (xssRequest.checkXSSAndSql(body) || xssRequest.checkParameter())) {//等价于 str != null && str.length > 0 && str.trim().length > 0
+                throwError(outputStream, body);
+            } else {
+                xssRequest.setParamsMaps(paramsMaps);
+                chain.doFilter(xssRequest, response);
+            }
+
+        } else if (method.equals("GET")) {
+            assert xssRequest != null;
+            if (xssRequest.checkParameter())
+                throwError(outputStream, "");
+            else
+                chain.doFilter(xssRequest, response);
+//            assert xssRequest != null;
+//            Map<String, String[]> parameterMap = xssRequest.getParameterMap();
+//            Set<Map.Entry<String, String[]>> entries = parameterMap.entrySet();
+//            Iterator<Map.Entry<String, String[]>> iterator = entries.iterator();
+//            while (iterator.hasNext()) {
+//                Map.Entry<String, String[]> next = iterator.next();
+//                paramsMaps.put(next.getKey(), next.getValue()[0]);
+//            }
         } else {
             chain.doFilter(xssRequest, response);
         }
-//        if ("POST".equalsIgnoreCase(method)) {//判断是否为post
-//            param = getBodyString(xssRequest.getReader());//获取参数
-//            if (StringUtils.isNotBlank(param) && (xssRequest.checkXSSAndSql(param) || xssRequest.checkParameter())) {//等价于 str != null && str.length > 0 && str.trim().length > 0
-//                throwError(outputStream, param);
-//            } else
-//                chain.doFilter(new XssAndSqlHttpServletRequestWrapper((HttpServletRequest) request), response);
-//        } else if (method.equals("GET")) {
-//            if (xssRequest.checkParameter())
-//                throwError(outputStream, "");
-//            else
-//                chain.doFilter(xssRequest, response);
-//        } else {
-//            chain.doFilter(xssRequest, response);
-//        }
     }
 
 

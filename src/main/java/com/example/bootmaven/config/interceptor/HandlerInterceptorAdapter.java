@@ -1,5 +1,7 @@
 package com.example.bootmaven.config.interceptor;
 
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -37,8 +40,9 @@ public class HandlerInterceptorAdapter implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader("Authorization");
-
-        boolean result = StringUtils.hasLength(token) && JWTUtil.verify(token, GlobalValue.TOKEN_SECRET) && JWTUtil.parseToken(token).validate(0);
+        DateTime expire_time = DateUtil.date((Long) JWTUtil.parseToken(token).getPayload("expire_time"));
+        //        JWTUtil.parseToken(token).validate(0)一直等于false，不知道为什么
+        boolean result = StringUtils.hasLength(token) && JWTUtil.verify(token, GlobalValue.TOKEN_SECRET) && expire_time.after(DateUtil.date());
         if (result) {
             return true;
         } else {

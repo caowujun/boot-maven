@@ -1,14 +1,12 @@
 package com.example.bootmaven.config.interceptor;
 
 import cn.hutool.core.date.DateTime;
-import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
-import cn.hutool.jwt.JWTValidator;
 import cn.hutool.log.StaticLog;
 import com.example.bootmaven.config.GlobalValue;
 import com.example.bootmaven.response.R;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -16,8 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 /**
  * @author robin
@@ -26,7 +23,8 @@ import java.util.Date;
  */
 @Configuration
 public class HandlerInterceptorAdapter implements HandlerInterceptor {
-
+    @Autowired
+    private GlobalValue globalValue;
     /*
      * @author robin
      * @description 拦截没有登录的请求，并在没权限的说话返回一个警告
@@ -42,7 +40,7 @@ public class HandlerInterceptorAdapter implements HandlerInterceptor {
         String token = request.getHeader("Authorization");
         DateTime expire_time = DateUtil.date((Long) JWTUtil.parseToken(token).getPayload("expire_time"));
         //        JWTUtil.parseToken(token).validate(0)一直等于false，不知道为什么
-        boolean result = StringUtils.hasLength(token) && JWTUtil.verify(token, GlobalValue.TOKEN_SECRET) && expire_time.after(DateUtil.date());
+        boolean result = StringUtils.hasLength(token) && JWTUtil.verify(token, globalValue.getTokenSecret() ) && expire_time.after(DateUtil.date());
         if (result) {
             return true;
         } else {

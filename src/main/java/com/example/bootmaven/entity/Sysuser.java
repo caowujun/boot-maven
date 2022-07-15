@@ -9,8 +9,11 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 /**
  * <p>
@@ -31,12 +34,17 @@ public class Sysuser implements Serializable {
     private String id;
 
     @TableField("username")
+    @Size(min = 3, max = 20, message = "用户名长度只能在6-20之间")
+    @NotBlank(message = "用户名不能为空")
     private String username;
 
     @TableField("userpsd")
+    @NotBlank(message = "密码不能为空")
+    @Size(min = 6, max = 20, message = "密码长度只能在6-20之间")
     private String userpsd;
 
     @TableField("cnname")
+    @NotBlank(message = "姓名不能为空")
     private String cnname;
 
     @TableField("phonenum")

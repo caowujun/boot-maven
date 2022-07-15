@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.bootmaven.config.GlobalValue;
 import com.example.bootmaven.response.ResponseCode;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.bootmaven.entity.Sysuser;
 import com.example.bootmaven.service.ISysuserService;
@@ -43,6 +44,8 @@ public class SysuserController extends BaseController {
     private ISysuserService iSysuserService;
     @Resource
     private SysuserTransfer transfer;
+    @Resource
+    private GlobalValue globalValue;
 
     /**
      * 分页查询所有数据
@@ -180,11 +183,11 @@ public class SysuserController extends BaseController {
                         put("id", finalSysuser.getId());
                         put("loginname", finalSysuser.getUsername());
                         put("cnname", finalSysuser.getCnname());
-                        put("expire_time", System.currentTimeMillis() + 120 * 60 * 1000);
+                        put("expire_time", System.currentTimeMillis() + new Long(globalValue.getTokenExpiretime() ).intValue());
                     }
-                }   ;
+                };
 
-                String token = JWTUtil.createToken(map, GlobalValue.TOKEN_SECRET);
+                String token = JWTUtil.createToken(map, globalValue.getTokenSecret());
                 System.out.print(token);
                 response.addHeader("token", token);
 
